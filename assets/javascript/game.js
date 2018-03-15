@@ -1,9 +1,11 @@
 $( document ).ready(function() {
+
+$('#question').hide();
 $('#a1').hide();
 $('#a2').hide();
 $('#a3').hide();
 $('#a4').hide();
-$('#question').hide();
+
 
 
 // Variables
@@ -38,28 +40,33 @@ var questions = [
 ];
 
 var temp = questions;
+i = temp[Math.floor(Math.random()*questions.length)];
+
+console.log(temp[1].question);
+console.log(temp[1].ans2);
+
 $('#start').click (function () {
+    $('#question').show();
+    $('#question').append(temp[0].question);
     $('#a1').show();
-$('#a2').show();
-$('#a3').show();
-$('#a4').show();
-$('#question').show();
+    $('#a1').append(temp[0].ans1);   
+    $('#a2').show();
+    $('#a2').append(temp[0].ans2);
+    $('#a3').show();
+    $('#a3').append(temp[0].ans3);
+    $('#a4').show();
+    $('#a4').append(temp[0].ans4);
+    $('#start').hide();
 });
 
 
-console.log(temp);
+// function to show next question
 
-console.log(questions[0].question);
-console.log(questions[0].ans1)
-// Functions
+// console.log(temp);
 
+// console.log(questions[0].question);
+// console.log(questions[0].ans1)
 
-
-// startGame function
-
-// timerFunction
-
-// 
 
 
 // Processes
