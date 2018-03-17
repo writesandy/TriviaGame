@@ -46,8 +46,8 @@ var temp = questions;
 
 
 
-console.log(temp[0].question);
-console.log(temp[0].ans1);
+// console.log(temp[0].question);
+// console.log(temp[0].ans1);
 
 $('#start').click (function () {
     $('#question').show();
@@ -65,16 +65,26 @@ $('#start').click (function () {
 
 // this is not working - undefined error
 
-$('.btn-lg').click(function () {
+$('.btn-lg').click(function() {
     let temp = questions;
-    if ( $(this).text() === temp[0].correctAns);
-    wins++;
-    console.log('btn click', wins);
-}); 
+    if ( $(this).text() === temp[0].correctAns) {
+        wins++;
+        console.log('winner');
+    } else {
+    ($(this).text() !== temp[0].correctAns);
+    losses++;
+    console.log('nope');
+    }
+  
+});
 
-})
+    console.log('btn click', temp[0].correctAns);
+    
+
+
 
 // Timer on the question for 30 secs
 
 // If time runs out > show answer > counter losses++ > remove temp [0] from temp questions > show next question
-// If answer is correct > good job! > counter wins++ > remove temp [0] 
+// If answer is correct > good job! > counter wins++ > remove temp [0]
+})
