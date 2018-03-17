@@ -19,6 +19,9 @@ $('#a4').hide();
 //if user selected wrong answer display answer and next question
 //if user answers correctly - good job! display next question
 
+let wins = 0;
+let losses = 0;
+
 var questions = [
 
 {   question: 'Which of the seven dwarfs in "Snow White and the Seven Dwarves" did not have a beard?',
@@ -26,7 +29,7 @@ var questions = [
     ans2: "Dopey",
     ans3: "Grumpy",
     ans4: "Bashful",
-    correctAns: "ans2",
+    correctAns: "Dopey",
 },
 
 {
@@ -35,15 +38,16 @@ var questions = [
     ans2: 'Think Pig',
     ans3: 'Hungry Pig',
     ans4: 'Some Pig',
-    correctAns: 'ans4',
+    correctAns: 'Some Pig',
 }
 ];
 
 var temp = questions;
-i = temp[Math.floor(Math.random()*questions.length)];
 
-console.log(temp[1].question);
-console.log(temp[1].ans2);
+
+
+console.log(temp[0].question);
+console.log(temp[0].ans1);
 
 $('#start').click (function () {
     $('#question').show();
@@ -59,17 +63,18 @@ $('#start').click (function () {
     $('#start').hide();
 });
 
+// this is not working - undefined error
 
-// function to show next question
+$('.btn-lg').click(function () {
+    let temp = questions;
+    if ( $(this).text() === temp[0].correctAns);
+    wins++;
+    console.log('btn click', wins);
+}); 
 
-// console.log(temp);
+})
 
-// console.log(questions[0].question);
-// console.log(questions[0].ans1)
+// Timer on the question for 30 secs
 
-
-
-// Processes
-
-
-});
+// If time runs out > show answer > counter losses++ > remove temp [0] from temp questions > show next question
+// If answer is correct > good job! > counter wins++ > remove temp [0] 
