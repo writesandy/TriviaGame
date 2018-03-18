@@ -69,9 +69,6 @@ function startTimer() {
 
 }
 
-
-
-
 // initial start of game
 
 $('#start').click (function () {
@@ -91,69 +88,104 @@ $('#start').click (function () {
 
 });
 
+// function to shift for next question
+
+// function goShift() {
+//     if (temp !== undefined) {
+//         temp.shift();
+
+//     } else if (temp === undefined){
+//         clearInterval(timer);
+//         $('#question').hide();
+//         $('#a1').hide(temp[0].ans1);
+//         $('#a2').hide();
+//         $('#a3').hide();
+//         $('#a4').hide();
+//         $('#showScores').show();
+//         alert('Thats all folks');
+//     }
+// }
+
+
 //function to show next question
 
 function nextQues() {
-    temp.shift();
-    $('#question').show();
-    $('#question').empty();
-    $('#question').append(temp[0].question);
-    $('#a1').show();
-    $('#a1').empty();
-    $('#a1').append(temp[0].ans1);   
-    $('#a2').show();
-    $('#a2').empty();
-    $('#a2').append(temp[0].ans2);
-    $('#a3').show();
-    $('#a3').empty();
-    $('#a3').append(temp[0].ans3);
-    $('#a4').show();
-    $('#a4').empty();
-    $('#a4').append(temp[0].ans4);
-    clearInterval(timer);
-    timeLeft = 10;
-    startTimer();
-    $("#timer").html('<h2>' + timeLeft + '</h2>');
+
+        $('#question').show();
+        $('#question').empty();
+        $('#question').append(temp[0].question);
+        $('#a1').show();
+        $('#a1').empty();
+        $('#a1').append(temp[0].ans1);   
+        $('#a2').show();
+        $('#a2').empty();
+        $('#a2').append(temp[0].ans2);
+        $('#a3').show();
+        $('#a3').empty();
+        $('#a3').append(temp[0].ans3);
+        $('#a4').show();
+        $('#a4').empty();
+        $('#a4').append(temp[0].ans4);
+        clearInterval(timer);
+        timeLeft = 10;
+        startTimer();
+        $("#timer").html('<h2>' + timeLeft + '</h2>');
+
 }
-
-
-
 
 
 // function for correct Answer
 
 function correct() {
     wins++;
-    alert('Yass! You got it!')
+    temp.shift();
+    if (!Array.isArray(temp) || !temp.length) {
+        alert('you got it!');
+        alert('game over');
+        clearInterval(timer);
+        $("#timer").hide();
+        $('#question').hide();
+        $('#a1').hide();
+        $('#a2').hide();
+        $('#a3').hide();
+        $('#a4').hide();
+        $('#showScores').show();
+      } else {
+        alert('you got it!')
+        nextQues();
+    }
 }
 
 //function for incorrect Answer
 
 function incorrect() {
     losses++;
-    alert('Ooops!')
+    temp.shift();
+    if (!Array.isArray(temp) || !temp.length) {
+        alert('sorry!');
+        alert('game over');
+        clearInterval(timer);
+        $("#timer").hide();
+        $('#question').hide();
+        $('#a1').hide();
+        $('#a2').hide();
+        $('#a3').hide();
+        $('#a4').hide();
+        $('#showScores').show();
+      } else {
+        alert('sorry!')
+        nextQues();
+    }
+
 }
 
-// Outta Time
-
-// If out of time - sorry you are out of time, show correctAnswer, next question
-
-function noTime() {
-    losses++;
-    alert('you are out of time')
-
-}
 
 // click on button for correct answer
-
 $('.btn-lg').click(function() {
-    let temp = questions;
     if ( $(this).text() === temp[0].correctAns) {
         correct();
-        nextQues();
     } else if ($(this).text() !== temp[0].correctAns){
-            incorrect();
-            nextQues();
+        incorrect();
     }
     });
 
