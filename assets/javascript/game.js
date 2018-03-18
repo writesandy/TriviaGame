@@ -1,28 +1,22 @@
 $( document ).ready(function() {
 
-$('#question').hide();
-$('#a1').hide();
-$('#a2').hide();
-$('#a3').hide();
-$('#a4').hide();
-$('#showScores').hide();
-
-
-
-// Variables
-
-// store all the objects in the 
-// create temp array with questions and then pop off the one that is displayed after user answers. 
-// Then copy into  new temp array length
-
-//is index = 0 for temp? show final results and restart Gamepad
-//if time is 0 then display answer and then next question
-//if user selected wrong answer display answer and next question
-//if user answers correctly - good job! display next question
-
 let wins = 0;
 let losses = 0;
 
+// populate wins, losses and trivia questions on DOM
+
+$('.wins').text(wins);
+
+function hideTrivia () {
+    $('#question').hide();
+    $('#a1').hide();
+    $('#a2').hide();
+    $('#a3').hide();
+    $('#a4').hide();
+    $('#timer').hide();
+    $('#scores').hide();
+    }
+    hideTrivia();
 
 var questions = [
 
@@ -48,8 +42,6 @@ var temp = questions;
 
 // timer function
 
-//var timer;
-
 var timer;
 var timeLeft = 10;
 
@@ -58,12 +50,10 @@ function startTimer() {
   timer = setInterval(function() {  
     $("#timer").html('<h2>' + timeLeft + '</h2>');
     if (timeLeft === 0) {
-        alert('sorry - you are out of time');
-        losses++;
-      clearInterval(timer);
-      nextQues();
+        incorrect();
+        // nextQues();
     } else {
-      timeLeft--;
+        timeLeft--;
     }
   }, 1000);
 
@@ -72,45 +62,18 @@ function startTimer() {
 // initial start of game
 
 $('#start').click (function () {
-    $('#question').show();
-    $('#question').append(temp[0].question);
-    $('#a1').show();
-    $('#a1').append(temp[0].ans1);   
-    $('#a2').show();
-    $('#a2').append(temp[0].ans2);
-    $('#a3').show();
-    $('#a3').append(temp[0].ans3);
-    $('#a4').show();
-    $('#a4').append(temp[0].ans4);
     $('#start').hide();
-    clearInterval(timer);
-    startTimer();
-
+    nextQues();
 });
-
-// function to shift for next question
-
-// function goShift() {
-//     if (temp !== undefined) {
-//         temp.shift();
-
-//     } else if (temp === undefined){
-//         clearInterval(timer);
-//         $('#question').hide();
-//         $('#a1').hide(temp[0].ans1);
-//         $('#a2').hide();
-//         $('#a3').hide();
-//         $('#a4').hide();
-//         $('#showScores').show();
-//         alert('Thats all folks');
-//     }
-// }
-
 
 //function to show next question
 
 function nextQues() {
-
+        clearInterval(timer);
+        timeLeft = 10;
+        startTimer();
+        $('#timer').show();
+        $("#timer").html('<h2>' + timeLeft + '</h2>');
         $('#question').show();
         $('#question').empty();
         $('#question').append(temp[0].question);
@@ -126,11 +89,6 @@ function nextQues() {
         $('#a4').show();
         $('#a4').empty();
         $('#a4').append(temp[0].ans4);
-        clearInterval(timer);
-        timeLeft = 10;
-        startTimer();
-        $("#timer").html('<h2>' + timeLeft + '</h2>');
-
 }
 
 
@@ -143,13 +101,8 @@ function correct() {
         alert('you got it!');
         alert('game over');
         clearInterval(timer);
-        $("#timer").hide();
-        $('#question').hide();
-        $('#a1').hide();
-        $('#a2').hide();
-        $('#a3').hide();
-        $('#a4').hide();
-        $('#showScores').show();
+        hideTrivia();
+        $('#scores').show();
       } else {
         alert('you got it!')
         nextQues();
@@ -165,20 +118,14 @@ function incorrect() {
         alert('sorry!');
         alert('game over');
         clearInterval(timer);
-        $("#timer").hide();
-        $('#question').hide();
-        $('#a1').hide();
-        $('#a2').hide();
-        $('#a3').hide();
-        $('#a4').hide();
-        $('#showScores').show();
+        hideTrivia();
+        $('#scores').show();
       } else {
         alert('sorry!')
         nextQues();
     }
 
 }
-
 
 // click on button for correct answer
 $('.btn-lg').click(function() {
