@@ -21,6 +21,7 @@ $('#a4').hide();
 
 let wins = 0;
 let losses = 0;
+var started = false;
 
 var questions = [
 
@@ -44,10 +45,61 @@ var questions = [
 
 var temp = questions;
 
+//function to show next question
 
+function nextQues() {
+    temp.shift();
+    $('#question').show();
+    $('#question').empty();
+    $('#question').append(temp[0].question);
+    $('#a1').show();
+    $('#a1').empty();
+    $('#a1').append(temp[0].ans1);   
+    $('#a2').show();
+    $('#a2').empty();
+    $('#a2').append(temp[0].ans2);
+    $('#a3').show();
+    $('#a3').empty();
+    $('#a3').append(temp[0].ans3);
+    $('#a4').show();
+    $('#a4').empty();
+    $('#a4').append(temp[0].ans4);
+}
 
-// console.log(temp[0].question);
-// console.log(temp[0].ans1);
+// timer function
+var count =32;
+var counter=setInterval(startTimer, 1000);
+
+function startTimer () {
+    count = count-1;
+    if (count < 0)
+    {
+        clearInterval(counter);
+        return;
+        // $('#timer').show();
+ 
+    }
+        $('#timer').html('<h2>' + count + '</h2>');
+}
+
+// function for correct Answer
+
+function correct() {
+    wins++;
+    alert('correct!')
+}
+
+//function for incorrect Answer
+
+function incorrect() {
+    losses++;
+    alert('Ooops!')
+}
+
+// function showScores() {
+//     if (temp === )
+// }
+
 
 $('#start').click (function () {
     $('#question').show();
@@ -61,19 +113,20 @@ $('#start').click (function () {
     $('#a4').show();
     $('#a4').append(temp[0].ans4);
     $('#start').hide();
+    startTimer();
 });
 
-// this is not working - undefined error
+// click on button for correct answer
 
 $('.btn-lg').click(function() {
     let temp = questions;
     if ( $(this).text() === temp[0].correctAns) {
-        wins++;
-        console.log('winner');
+        correct();
+        nextQues();
     } else {
     ($(this).text() !== temp[0].correctAns);
-    losses++;
-    console.log('nope');
+        incorrect();
+        nextQues();
     }
   
 });
