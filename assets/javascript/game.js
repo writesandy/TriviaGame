@@ -5,6 +5,7 @@ $('#a1').hide();
 $('#a2').hide();
 $('#a3').hide();
 $('#a4').hide();
+$('#showScores').hide();
 
 
 
@@ -21,7 +22,7 @@ $('#a4').hide();
 
 let wins = 0;
 let losses = 0;
-var started = false;
+
 
 var questions = [
 
@@ -45,6 +46,46 @@ var questions = [
 
 var temp = questions;
 
+// timer function
+
+//var timer;
+
+var timer;
+var timeLeft = 30;
+
+
+function startTimer() {
+  timer = setInterval(function() {  
+    $("#timer").html('<h2>' + timeLeft + '</h2>');
+    if (timeLeft === 0) {
+      clearInterval(timer);
+    } else {
+      timeLeft--;
+    }
+  }, 1000);
+
+}
+
+
+// initial start of game
+
+$('#start').click (function () {
+    $('#question').show();
+    $('#question').append(temp[0].question);
+    $('#a1').show();
+    $('#a1').append(temp[0].ans1);   
+    $('#a2').show();
+    $('#a2').append(temp[0].ans2);
+    $('#a3').show();
+    $('#a3').append(temp[0].ans3);
+    $('#a4').show();
+    $('#a4').append(temp[0].ans4);
+    $('#start').hide();
+    clearInterval(timer);
+    startTimer();
+
+});
+
 //function to show next question
 
 function nextQues() {
@@ -64,29 +105,21 @@ function nextQues() {
     $('#a4').show();
     $('#a4').empty();
     $('#a4').append(temp[0].ans4);
+    clearInterval(timer);
+    timeLeft = 30;
+    startTimer();
+    $("#timer").html('<h2>' + timeLeft + '</h2>');
 }
 
-// timer function
-var count =32;
-var counter=setInterval(startTimer, 1000);
 
-function startTimer () {
-    count = count-1;
-    if (count < 0)
-    {
-        clearInterval(counter);
-        return;
-        // $('#timer').show();
- 
-    }
-        $('#timer').html('<h2>' + count + '</h2>');
-}
+
+
 
 // function for correct Answer
 
 function correct() {
     wins++;
-    alert('correct!')
+    alert('correct!');
 }
 
 //function for incorrect Answer
@@ -97,24 +130,8 @@ function incorrect() {
 }
 
 // function showScores() {
-//     if (temp === )
-// }
 
 
-$('#start').click (function () {
-    $('#question').show();
-    $('#question').append(temp[0].question);
-    $('#a1').show();
-    $('#a1').append(temp[0].ans1);   
-    $('#a2').show();
-    $('#a2').append(temp[0].ans2);
-    $('#a3').show();
-    $('#a3').append(temp[0].ans3);
-    $('#a4').show();
-    $('#a4').append(temp[0].ans4);
-    $('#start').hide();
-    startTimer();
-});
 
 // click on button for correct answer
 
