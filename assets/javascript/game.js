@@ -51,20 +51,25 @@ var temp = questions;
 //var timer;
 
 var timer;
-var timeLeft = 30;
+var timeLeft = 10;
 
 
 function startTimer() {
   timer = setInterval(function() {  
     $("#timer").html('<h2>' + timeLeft + '</h2>');
     if (timeLeft === 0) {
+        alert('sorry - you are out of time');
+        losses++;
       clearInterval(timer);
+      nextQues();
     } else {
       timeLeft--;
     }
   }, 1000);
 
 }
+
+
 
 
 // initial start of game
@@ -106,7 +111,7 @@ function nextQues() {
     $('#a4').empty();
     $('#a4').append(temp[0].ans4);
     clearInterval(timer);
-    timeLeft = 30;
+    timeLeft = 10;
     startTimer();
     $("#timer").html('<h2>' + timeLeft + '</h2>');
 }
@@ -119,7 +124,7 @@ function nextQues() {
 
 function correct() {
     wins++;
-    alert('correct!');
+    alert('Yass! You got it!')
 }
 
 //function for incorrect Answer
@@ -129,9 +134,15 @@ function incorrect() {
     alert('Ooops!')
 }
 
-// function showScores() {
+// Outta Time
 
+// If out of time - sorry you are out of time, show correctAnswer, next question
 
+function noTime() {
+    losses++;
+    alert('you are out of time')
+
+}
 
 // click on button for correct answer
 
@@ -140,13 +151,11 @@ $('.btn-lg').click(function() {
     if ( $(this).text() === temp[0].correctAns) {
         correct();
         nextQues();
-    } else {
-    ($(this).text() !== temp[0].correctAns);
-        incorrect();
-        nextQues();
+    } else if ($(this).text() !== temp[0].correctAns){
+            incorrect();
+            nextQues();
     }
-  
-});
+    });
 
     console.log('btn click', temp[0].correctAns);
     
