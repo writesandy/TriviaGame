@@ -144,6 +144,19 @@ $('#start').click (function () {
     nextQues();
 });
 
+$('#tryAgain').click (function () {
+    $('#tryAgain').hide();
+    temp.unshift(1,2,3,4,5,6,7,8,9,10);
+    $('#question').show();
+    $('#a1').show();
+    $('#a2').show();
+    $('#a3').show();
+    $('#a4').show();
+    $('#timer').show();
+    $('#scores').hide();
+    nextQues();
+});
+
 //function to show next question
 
 function nextQues() {
