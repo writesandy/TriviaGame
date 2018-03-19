@@ -1,11 +1,12 @@
 $( document ).ready(function() {
-
+var timer;
+var timeLeft = 10;
 let wins = 0;
 let losses = 0;
 
 // populate wins, losses and trivia questions on DOM
 
-$('.wins').text(wins);
+
 
 function hideTrivia () {
     $('#question').hide();
@@ -16,34 +17,105 @@ function hideTrivia () {
     $('#timer').hide();
     $('#scores').hide();
     }
+
     hideTrivia();
 
 var questions = [
 
-{   question: 'Which of the seven dwarfs in "Snow White and the Seven Dwarves" did not have a beard?',
-    ans1: 'Happy',
-    ans2: "Dopey",
-    ans3: "Grumpy",
-    ans4: "Bashful",
-    correctAns: "Dopey",
+{   question: 'In the Peanuts cartoon and comics, what color is Woodstock??',
+    ans1: 'Blue',
+    ans2: "Green",
+    ans3: "Yellow",
+    ans4: "Orange",
+    correctAns: "Yellow",
 },
 
 {
-    question: 'What is the first message that Charlotte weaves in Charlottes web?',
-    ans1: 'Good Pig',
-    ans2: 'Think Pig',
-    ans3: 'Hungry Pig',
-    ans4: 'Some Pig',
-    correctAns: 'Some Pig',
-}
+    question: 'Which of the following is a color scheme that involves the use of only one hue?',
+    ans1: 'Complementary',
+    ans2: 'Analogous',
+    ans3: 'Chromomentary',
+    ans4: 'Monochromatic',
+    correctAns: 'Monochromatic',
+},
+
+{
+    question: 'What movie in 1986, had 11 Oscar nominations and won none?',
+    ans1: 'Back to the Future',
+    ans2: 'Out of Africa',
+    ans3: 'Prizzi+'+'s'+'Honor',
+    ans4: 'The Color Purple',
+    correctAns: 'The Color Purple',
+},
+
+{
+    question: 'Geri Halliwell'+'s hair was what color while she was a spice girl??',
+    ans1: 'Brown',
+    ans2: 'Red',
+    ans3: 'Bleach Blond',
+    ans4: 'Green',
+    correctAns: 'Red',
+},
+
+{
+    question: 'Which of the following colors are classified as primary colors?',
+    ans1: 'Red, yellow, and blue',
+    ans2: 'Orange, green, and violet',
+    ans3: 'White, Black, Rainbow',
+    ans4: 'None of These',
+    correctAns: 'Red, yellow, and blue',
+},
+
+{
+    question: 'The Nazi SS troops wore what color shirts??',
+    ans1: 'White',
+    ans2: 'Black and White',
+    ans3: 'Black',
+    ans4: 'Black White and Red',
+    correctAns: 'Black',
+},
+
+{
+    question: 'From what element does turquoise derive its distinctive color??',
+    ans1: "Copper",
+    ans2: 'Manganese',
+    ans3: 'Vitamin B12',
+    ans4: 'Radiation',
+    correctAns: 'Copper',
+},
+
+{
+    question: 'Who had a 1980s hit with True Colors?',
+    ans1: 'Alanis Morisette',
+    ans2: 'Madonna',
+    ans3: 'Cindy Lauper',
+    ans4: 'Olivia Newton-John',
+    correctAns: 'Cindy Lauper',
+},
+
+{
+    question: 'Before he had it painted pink in 1955, what color was Elvis Presley+'+'s first Cadillac??',
+    ans1: 'Blue',
+    ans2: 'Black',
+    ans3: 'Myth - it was always pink',
+    ans4: 'White',
+    correctAns: 'Blue',
+},
+
+{
+    question: 'What part of the eye gives it color?',
+    ans1: 'Cornea',
+    ans2: 'Iris',
+    ans3: 'Lens',
+    ans4: 'Retina',
+    correctAns: 'Iris',
+},
+
 ];
 
 var temp = questions;
 
 // timer function
-
-var timer;
-var timeLeft = 10;
 
 
 function startTimer() {
@@ -51,13 +123,19 @@ function startTimer() {
     $("#timer").html('<h2>' + timeLeft + '</h2>');
     if (timeLeft === 0) {
         incorrect();
-        // nextQues();
     } else {
         timeLeft--;
     }
   }, 1000);
 
 }
+
+function showScores() {
+    $('#scores').show();
+    $('.wins').text(wins);
+    $('.losses').text(losses);
+}
+
 
 // initial start of game
 
@@ -69,6 +147,7 @@ $('#start').click (function () {
 //function to show next question
 
 function nextQues() {
+        $('#scores').hide();
         clearInterval(timer);
         timeLeft = 10;
         startTimer();
@@ -98,14 +177,22 @@ function correct() {
     wins++;
     temp.shift();
     if (!Array.isArray(temp) || !temp.length) {
-        alert('you got it!');
-        alert('game over');
         clearInterval(timer);
         hideTrivia();
         $('#scores').show();
+        $('.wins').text(wins);
+        $('.losses').text(losses);
+
       } else {
-        alert('you got it!')
+        clearInterval(timer);
+
+        hideTrivia();
+        $('#scores')
+        $('.wins').text(wins);
+        $('.losses').text(losses);
         nextQues();
+
+
     }
 }
 
@@ -115,13 +202,12 @@ function incorrect() {
     losses++;
     temp.shift();
     if (!Array.isArray(temp) || !temp.length) {
-        alert('sorry!');
-        alert('game over');
         clearInterval(timer);
         hideTrivia();
-        $('#scores').show();
+        showScores();
       } else {
-        alert('sorry!')
+        clearInterval(timer);
+        showScores();
         nextQues();
     }
 

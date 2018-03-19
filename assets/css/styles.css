@@ -2,6 +2,11 @@ body {
     background-image: url("../images/rainbow-wave.jpg")
 }
 
+h1 {
+    color: greenyellow;
+    
+}
+
 h2 {
     color: white;
 }
