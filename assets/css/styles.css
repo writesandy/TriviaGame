@@ -2,6 +2,9 @@ body {
     background-image: url("../images/rainbow-wave.jpg")
 }
 
+.hide-tryagain {
+    visibility: hidden;
+}
 h1 {
     color: greenyellow;
     
@@ -9,6 +12,10 @@ h1 {
 
 h2 {
     color: white;
+}
+
+h3 {
+    color: #ffff;
 }
 .button {
     display: block;

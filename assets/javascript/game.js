@@ -120,7 +120,7 @@ var temp = questions;
 
 function startTimer() {
   timer = setInterval(function() {  
-    $("#timer").html('<h2>' + timeLeft + '</h2>');
+    $("#timer").text(`${timeLeft} seconds`);
     if (timeLeft === 0) {
         incorrect();
     } else {
@@ -146,7 +146,7 @@ $('#start').click (function () {
 
 $('#tryAgain').click (function () {
     $('#tryAgain').hide();
-    temp.unshift(1,2,3,4,5,6,7,8,9,10);
+    temp.unshift(9,8,7,6,5,4,3,2,1,0);
     $('#question').show();
     $('#a1').show();
     $('#a2').show();
@@ -165,7 +165,7 @@ function nextQues() {
         timeLeft = 10;
         startTimer();
         $('#timer').show();
-        $("#timer").html('<h2>' + timeLeft + '</h2>');
+//        $("#timer").html('<h2>' + timeLeft + '</h2>');
         $('#question').show();
         $('#question').empty();
         $('#question').append(temp[0].question);
