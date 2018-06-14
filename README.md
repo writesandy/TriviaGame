@@ -1,4 +1,4 @@
-# <a href="https://writesandy.github.io/TriviaGame/u">TriviaGame</a>
+# <a href="https://writesandy.github.io/TriviaGame/">TriviaGame</a>
 
 <br>
 
