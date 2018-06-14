@@ -1,4 +1,4 @@
-# <a href="https://find-new-friend.herokuapp.com/">TriviaGame</a>
+# <a href="https://writesandy.github.io/TriviaGame/u">TriviaGame</a>
 
 <br>
 
